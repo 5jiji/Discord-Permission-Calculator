@@ -5,17 +5,23 @@ let div
 
 /** @param {Array} data*/
 function main(data) {
-  div = document.getElementById("input")
+  let maindiv = document.getElementsByClassName("input_div")[0]
+  div = document.createElement("div")
+  maindiv.appendChild(div)
+  let i = 0
   data.forEach(e => {
-    calculated.push([e[0], (+(eval(1n << e[1])+[]))])
-    document.body.insertBefore(document.createElement("input"), div)
-    let _ = document.getElementsByTagName("input")
-    let __ = _.length
-    while (__) {
-      __--
-      _[__].setAttribute('type', 'checkbox')
-      _[__].setAttribute('class', 'checkbox')
+    if (i === 5) {
+      i = 0
+      div = document.createElement("div")
+      maindiv.appendChild(div)
     }
+    calculated.push([e[0], (+(eval(1n << e[1])+[]))])
+    div.appendChild(document.createElement("input"))
+    let _ = document.getElementsByTagName("input")
+    _[_.length - 1].setAttribute('type', 'checkbox')
+    _[_.length - 1].setAttribute('class', `input_checkbox ${e[0]}`)
+    i++
   });
 }
-main(data)
+
+document.body.onload = main(data)
